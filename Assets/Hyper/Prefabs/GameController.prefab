@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 332622678306209219}
   - component: {fileID: 3972708337257296622}
-  - component: {fileID: 6896184787808900502}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -45,17 +44,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d896f46273906bc45a4932c8dced9a89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
---- !u!114 &6896184787808900502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3204981117249492272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16393b205bfb026428de809828dcc748, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreText: {fileID: 0}

@@ -1,34 +1,29 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LoadingManager : MonoBehaviour
+public class LoadingController : MonoBehaviour
 {
-    [SerializeField] private Slider progressBar; // Thanh tiến trình
+    public static LoadingController Instance { get; private set; }
+    [SerializeField] private Slider progressBar;
 
-    void Start()
+    private void Awake()
     {
-        StartCoroutine(LoadBattleScene()); // 🔥 Bắt đầu tải Battle Scene
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
     }
 
-    IEnumerator LoadBattleScene()
+    private void Start()
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync("BattleScene");
-        operation.allowSceneActivation = false; // 🔥 Ngăn Battle Scene tự động load khi chưa xong
+        StartCoroutine(GameController.Instance.LoadTargetScene()); // 🔥 Bắt đầu load scene cần thiết
+    }
 
-        while (!operation.isDone)
-        {
-            float progress = Mathf.Clamp01(operation.progress / 0.9f);
-            progressBar.value = progress; // Cập nhật progress bar
-
-            if (operation.progress >= 0.9f) // 🔥 Khi load gần xong (progress = 0.9)
-            {
-                yield return new WaitForSeconds(1f); // Giả lập thời gian chờ 1 giây
-                operation.allowSceneActivation = true; // 🔥 Kích hoạt Battle Scene
-            }
-
-            yield return null;
-        }
+    public void UpdateProgress(float progress)
+    {
+        if (progressBar != null)
+            progressBar.value = progress; // 🔥 Cập nhật thanh tiến trình
     }
 }

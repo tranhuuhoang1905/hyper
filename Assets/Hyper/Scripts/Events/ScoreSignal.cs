@@ -1,4 +1,4 @@
- 
+using UnityEngine;
 public class ScoreSignal
 {
     public static event System.Action<int> OnEnemyKilled;

@@ -3,7 +3,21 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    
+    public static UIManager Instance { get; private set; }
     [SerializeField] private TextMeshProUGUI scoreText;
+    void Awake()
+    {
+        
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
 
     void OnEnable()
     {
@@ -19,5 +33,6 @@ public class UIManager : MonoBehaviour
     {
         scoreText.text = newScore.ToString();
     }
+
 
 }
