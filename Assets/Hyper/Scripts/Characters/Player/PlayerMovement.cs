@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
         if (!isAlive) { return; }
         myAnimator.SetTrigger("IsActack");
         
-        IsRunning = false;
+        // IsRunning = false;
         Invoke("InstantiateBullet", 0.2f); 
     }
     void InstantiateBullet() // This function is called after the delay

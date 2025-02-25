@@ -5,7 +5,7 @@ public class BattleSelectController : MonoBehaviour
 {
     public void OnBattleSelectButtonPressed(int level)
     {
-        GameController.Instance.SetLevel(level); // nên tạo gameManager hơn, nhưng hiện tại gamemanager chưa chứa bất cứ thứ gì nên tạm vậy
+        GameManager.Instance.SetLevel(level); // nên tạo gameManager hơn, nhưng hiện tại gamemanager chưa chứa bất cứ thứ gì nên tạm vậy
         SceneSignal.LoadScene("BattleScene");
     }
     
