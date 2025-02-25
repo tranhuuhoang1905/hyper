@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         if (!isAlive) { return; }
         Run();
         FlipSprite();
-        // ClimbLadder();
+        ClimbLadder();
         Die();
     }
 
@@ -77,10 +77,6 @@ public class PlayerMovement : MonoBehaviour
             // do stuff
             myRigidbody.velocity += new Vector2 (0f, jumpSpeed);
         }
-    }
-    private void Jump()
-    {
-        // Logic nhảy (đã được di chuyển từ OnJump)
     }
 
     void Run()
