@@ -8,6 +8,6 @@ public class Bullet : BulletBase
     {
         BulletSoundManager soundManager = GetComponent<BulletSoundManager>();
         BulletMovement movement = GetComponent<BulletMovement>();
-        Initialize(soundManager, movement, transform.localScale.x);
+        Initialize(soundManager, movement);
     }
 }

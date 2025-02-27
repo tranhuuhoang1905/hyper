@@ -42,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isAlive) return;
         moveInput = value.Get<Vector2>();
+        if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) return;
     }
 
     void OnJump(InputValue value)
@@ -57,19 +58,28 @@ public class PlayerMovement : MonoBehaviour
 
     void Run()
     {
-        Vector2 playerVelocity = new Vector2(moveInput.x * runSpeed, myRigidbody.velocity.y);
-        myRigidbody.velocity = playerVelocity;
+        // Lấy input di chuyển
+        Vector3 moveDirection = new Vector3(moveInput.x, moveInput.y, 0);
 
-        bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
+        // Chuẩn hóa hướng di chuyển để tránh tốc độ lớn hơn 5px/s khi di chuyển chéo
+        if (moveDirection.magnitude > 1)
+        {
+            moveDirection.Normalize();
+        }
+
+        // Di chuyển với tốc độ 5px/s
+        transform.Translate(moveDirection * runSpeed * Time.deltaTime);
+
+        bool playerHasHorizontalSpeed = moveInput.x !=0 || moveInput.y != 0;
         myAnimator.SetBool("IsRunning", playerHasHorizontalSpeed);
     }
 
     void FlipSprite()
     {
-        bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
+        bool playerHasHorizontalSpeed = Mathf.Abs(moveInput.x) > Mathf.Epsilon;
         if (playerHasHorizontalSpeed)
         {
-            spriteRenderer.flipX = myRigidbody.velocity.x < 0; // Flip chỉ sprite
+            spriteRenderer.flipX = moveInput.x < 0; // Flip chỉ sprite
         }
     }
 

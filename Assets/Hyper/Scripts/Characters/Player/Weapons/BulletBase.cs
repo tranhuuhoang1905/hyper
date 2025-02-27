@@ -8,7 +8,7 @@ public abstract class BulletBase : MonoBehaviour
     private BulletSoundManager soundManager;
     private BulletMovement movement;
 
-    public void Initialize(BulletSoundManager soundManager, BulletMovement movement, float direction)
+    public void Initialize(BulletSoundManager soundManager, BulletMovement movement)
     {
         this.soundManager = soundManager;
         this.movement = movement;
@@ -17,8 +17,7 @@ public abstract class BulletBase : MonoBehaviour
         {
             soundManager.PlayShootSound();
         }
-
-        movement.Initialize(bulletSpeed, direction);
+        movement.Initialize(bulletSpeed);
     }
 
     void OnCollisionEnter2D(Collision2D other)

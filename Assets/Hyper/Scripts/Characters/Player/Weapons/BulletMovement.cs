@@ -2,21 +2,23 @@ using UnityEngine;
 
 public class BulletMovement : MonoBehaviour
 {
-    private Rigidbody2D myRigidbody;
     private float speed;
+    private Vector2 direction;
     void Awake()
-{
-    myRigidbody = GetComponent<Rigidbody2D>(); // ✅ Luôn có giá trị ngay khi Bullet được tạo
-}
-    public void Initialize(float bulletSpeed, float direction)
     {
-        float direction2 = transform.rotation.y == 0 ? 1 : -1;
-        speed = bulletSpeed*direction2 ;
-        // transform.localScale = new Vector2(Mathf.Sign(speed), 1f);
+    }
+    public void Initialize(float bulletSpeed)
+    {
+        speed = bulletSpeed;
+
+        // Lấy hướng bay từ góc quay hiện tại của viên đạn
+        float angle = transform.rotation.eulerAngles.z * Mathf.Deg2Rad; // Chuyển đổi góc từ độ sang radian
+        direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized; // Tạo vector hướng bay
     }
 
     void Update()
     {
-        myRigidbody.velocity = new Vector2(speed, 0f);
+        // Di chuyển viên đạn theo hướng của nó với vận tốc speed
+        transform.Translate(direction * speed * Time.deltaTime, Space.World);
     }
 }
