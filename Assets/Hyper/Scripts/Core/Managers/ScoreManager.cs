@@ -7,8 +7,10 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
+    
     public static ScoreManager Instance { get; private set; }
     [SerializeField] int score = 0;
+    [SerializeField] int life = 3;
     void Awake()
     {
         
@@ -30,7 +32,6 @@ public class ScoreManager : MonoBehaviour
     {
         ScoreSignal.OnEnemyKilled -= AddToScore; // Hủy đăng ký sự kiện
     }
-
 
     void Start() 
     {
